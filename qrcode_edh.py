@@ -12,7 +12,7 @@ from slugify import slugify
 START INPUTS
 Customize values below based on your commander
 '''
-deck_url = 'https://scryfall.com/card/c17/177/marchesa-the-black-rose'
+deck_url = 'https://archidekt.com/decks/1709090'
 
 commander_name = 'Skullbriar, the Walking Grave'
 #commander_name = 'Thassa, Deep-Dwelling'
@@ -116,9 +116,9 @@ for row in range(0, rows):
                 pdf.set_draw_color(color['r'], color['g'], color['b'])
                 pdf.set_fill_color(color['r'], color['g'], color['b'])
                 pdf.rect(
-                    x=margin_left + (cell_w * col_count) + (margin_horizontal * col_count),
+                    x=(margin_left - bleed) + (cell_w * col_count) + (margin_horizontal * col_count),
                     y=margin_top + (cell_h * row_count) + (margin_vertical * row_count) + y_offset,
-                    w=cell_w,
+                    w=cell_w + (bleed * 2),
                     h=16,
                     style='FD'
                 )
