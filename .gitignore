@@ -131,3 +131,4 @@ dmypy.json
 #project specific added by sdykman
 env_qrcode_edh/
 static/output/
+static/fonts/beleren-bold_P1.01.ttf

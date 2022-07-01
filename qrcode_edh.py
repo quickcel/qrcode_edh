@@ -4,8 +4,7 @@ import datetime
 from fpdf import FPDF
 from PDFRounded import PDFRounded as FPDF
 from qrcode.image.styledpil import StyledPilImage
-from qrcode.image.styles.moduledrawers import GappedSquareModuleDrawer, CircleModuleDrawer, RoundedModuleDrawer, VerticalBarsDrawer, HorizontalBarsDrawer
-from qrcode.image.styles.colormasks import SolidFillColorMask, RadialGradiantColorMask, SquareGradiantColorMask, HorizontalGradiantColorMask, VerticalGradiantColorMask, ImageColorMask
+from qrcode.image.styles.colormasks import VerticalGradiantColorMask
 from slugify import slugify
 
 '''
@@ -20,22 +19,25 @@ commander_name = 'Skullbriar, the Walking Grave'
 
 #Commander Colors
 commander_colors = []
-#commander_colors.append(constants.WHITE)
-#commander_colors.append(constants.BLUE)
+commander_colors.append(constants.WHITE)
+commander_colors.append(constants.BLUE)
 commander_colors.append(constants.BLACK)
-#commander_colors.append(constants.RED)
+commander_colors.append(constants.RED)
 commander_colors.append(constants.GREEN)
 
+#Most times you don't want to print a whole sheet.
+#Specify a sheet position if you just want a single code
 position = [0, 2]
 #position = 'all' 
 
+#Color of commander text underneath the code
 text_color = {
     'r':constants.BLACK['r'],
     'g':constants.BLACK['g'],
     'b':constants.BLACK['b']
 }
 
-#QR Code Color
+#QR Code Color: Used for 3+ color commanders
 qr_code_color = {
     'r':constants.BLACK['r'],
     'g':constants.BLACK['g'],
@@ -107,8 +109,10 @@ img.save(qr_code_file_name)
 
 row_count = 0
 for row in range(0, rows):
+    y_coord = margin_top + (cell_h * row_count) + (margin_vertical * row_count)
     col_count = 0
-    for col in range(0, cols):        
+    for col in range(0, cols): 
+        x_coord = (margin_left) + (cell_w * col_count) + (margin_horizontal * col_count)       
         if position == [row, col] or position == 'all':
             y_offset = 10
             for color in commander_colors:
@@ -116,8 +120,8 @@ for row in range(0, rows):
                 pdf.set_draw_color(color['r'], color['g'], color['b'])
                 pdf.set_fill_color(color['r'], color['g'], color['b'])
                 pdf.rect(
-                    x=(margin_left - bleed) + (cell_w * col_count) + (margin_horizontal * col_count),
-                    y=margin_top + (cell_h * row_count) + (margin_vertical * row_count) + y_offset,
+                    x=x_coord - bleed,
+                    y=y_coord + y_offset,
                     w=cell_w + (bleed * 2),
                     h=16,
                     style='FD'
@@ -126,8 +130,8 @@ for row in range(0, rows):
                 pdf.image(
                     color['mana_svg'],
                     w=8, h=8,
-                    x=margin_left + (cell_w * col_count) + (margin_horizontal * col_count) + 128,
-                    y=margin_top + (cell_h * row_count) + (margin_vertical * row_count) + y_offset + 3.5
+                    x=x_coord + 128,
+                    y=y_coord + y_offset + 3.5
                 )
                 y_offset += 16
 
@@ -135,8 +139,8 @@ for row in range(0, rows):
             pdf.set_draw_color(50,50,50)
             pdf.set_fill_color(255,255,255)
             pdf.rounded_rect(
-                x=margin_left + (cell_w * col_count) + (margin_horizontal * col_count) + 5,
-                y=margin_top + (cell_h * row_count) + (margin_vertical * row_count) + 5,
+                x=x_coord + 5,
+                y=y_coord + 5,
                 w=114,
                 h=114,
                 r=5,
@@ -147,16 +151,16 @@ for row in range(0, rows):
             #Overlay the QR code
             pdf.image(
                 qr_code_file_name,
-                x=margin_left + (cell_w * col_count) + (margin_horizontal * col_count) + 7.5,
-                y=margin_top + (cell_h * row_count) + (margin_vertical * row_count) + 7.5,
+                x=x_coord + 7.5,
+                y=y_coord + 7.5,
                 w=109,
                 h=109
             )
 
             #Add text at the bottom
             pdf.set_xy(
-                margin_left + (cell_w * col_count) + (margin_horizontal * col_count) + 5,
-                margin_top + (cell_h * row_count) + (margin_vertical * row_count) + 128
+                x_coord + 5,
+                y_coord + 128
             )
             pdf.set_text_color(text_color['r'], text_color['g'], text_color['b'])
             pdf.cell(txt=commander_name, align='C')
