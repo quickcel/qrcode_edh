@@ -4,7 +4,7 @@ import math
 import data_input
 import utils
 from fpdf import FPDF
-from lib.PDFRounded import PDFRounded as FPDF
+from PDFRounded import PDFRounded as FPDF
 
 from slugify import slugify
 
