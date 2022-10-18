@@ -40,3 +40,37 @@ JESKAI = {'r':158, 'g':122, 'b':133}
 SULTAI = {'r':12, 'g':77, 'b':78}
 MARDU = {'r':160, 'g':91, 'b':76}
 TEMUR = {'r':75, 'g':84, 'b':92}
+
+#Color of commander text underneath the code
+TEXT_COLOR = {
+    'r':BLACK['r'],
+    'g':BLACK['g'],
+    'b':BLACK['b']
+}
+
+#QR Code Color: Used for 3+ color commanders
+QR_CODE_COLOR = {
+    'r':BLACK['r'],
+    'g':BLACK['g'],
+    'b':BLACK['b']   
+}
+
+
+#Paper
+#All unit measurements are in points (72 points = 1 inch)
+DOC_W = 612
+DOC_H = 792
+DOC_COLS = 3
+DOC_ROWS = 4
+
+MARGIN_T = 46.44
+MARGIN_R = 45
+MARGIN_B = 46.44
+MARGIN_L = 45
+
+MARGIN_HORIZ = 45
+MARGIN_VERT = 41.04
+
+CELL_W = 144
+CELL_H = 144
+CELL_BLEED = 9
