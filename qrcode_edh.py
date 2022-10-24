@@ -6,8 +6,6 @@ import utils
 from fpdf import FPDF
 from PDFRounded import PDFRounded as FPDF
 
-from slugify import slugify
-
 commanders = data_input.commanders()
 
 print("Total Commanders:", len(commanders))
