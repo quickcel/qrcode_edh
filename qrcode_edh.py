@@ -3,25 +3,12 @@ import datetime
 import math
 import data_input
 import utils
-from fpdf import FPDF
-from PDFRounded import PDFRounded as FPDF
 
 commanders = data_input.commanders()
-
-print("Total Commanders:", len(commanders))
-print("This will use", math.ceil(len(commanders) / 3), "rows.")
 rows_max = math.ceil(len(commanders) / constants.DOC_COLS)
 
 # Set global values for the PDF
-pdf = FPDF(unit="pt", format=[constants.DOC_W, constants.DOC_H])
-pdf.set_margins(
-    left=constants.MARGIN_L, top=constants.MARGIN_T, right=constants.MARGIN_R
-)
-pdf.add_page()
-pdf.add_font("beleren-bold_P1", fname="static/fonts/beleren-bold_P1.01.ttf")
-pdf.set_font(family="beleren-bold_P1", size=9)
-pdf.set_auto_page_break(False)
-
+pdf = utils.set_pdf_global_values()
 
 # Starting row for the QR code
 # Valid values: 0, 1, 2, 3

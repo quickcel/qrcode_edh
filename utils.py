@@ -1,7 +1,22 @@
 import qrcode
+from fpdf import FPDF
+from PDFRounded import PDFRounded as FPDF
 from qrcode.image.styledpil import StyledPilImage
 from qrcode.image.styles.colormasks import VerticalGradiantColorMask
 import constants
+
+
+def set_pdf_global_values():
+    pdf = FPDF(unit="pt", format=[constants.DOC_W, constants.DOC_H])
+    pdf.set_margins(
+        left=constants.MARGIN_L, top=constants.MARGIN_T, right=constants.MARGIN_R
+    )
+    pdf.add_page()
+    pdf.add_font("beleren-bold_P1", fname="static/fonts/beleren-bold_P1.01.ttf")
+    pdf.set_font(family="beleren-bold_P1", size=9)
+    pdf.set_auto_page_break(False)
+
+    return pdf
 
 
 def create_qrcode_image(commander):
