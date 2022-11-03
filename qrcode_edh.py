@@ -39,7 +39,7 @@ for row in range(0, rows_max):
         + (constants.CELL_H * row_count)
         + (constants.MARGIN_VERT * row_count)
     )
-    #Check to see which row to start on
+    # Check to see which row to start on
     if row_start <= row_count:
         col_count = 0
         for col in range(0, constants.DOC_COLS):
@@ -48,7 +48,7 @@ for row in range(0, rows_max):
                 + (constants.CELL_W * col_count)
                 + (constants.MARGIN_HORIZ * col_count)
             )
-            #check to see which column to start on
+            # check to see which column to start on
             if col_start <= col_count or i > 0:
                 if i < len(commanders):
                     # Create the QR code image
@@ -82,7 +82,11 @@ for row in range(0, rows_max):
 
                     # Overlay the QR code image
                     pdf.image(
-                        qr_code_file_name, x=x_coord + 7.5, y=y_coord + 7.5, w=109, h=109
+                        qr_code_file_name,
+                        x=x_coord + 7.5,
+                        y=y_coord + 7.5,
+                        w=109,
+                        h=109,
                     )
 
                     # Add text at the bottom
@@ -93,7 +97,7 @@ for row in range(0, rows_max):
                         constants.TEXT_COLOR["b"],
                     )
                     pdf.cell(txt=commanders[i].name, align="C")
-                    
+
                     i += 1
             col_count += 1
     row_count += 1
