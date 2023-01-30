@@ -5,3 +5,19 @@ Create a QR Code for your commander decklist
 Sample Output:
 
 ![image](https://user-images.githubusercontent.com/6764517/176573141-8ae63668-490e-46d7-99a5-ba68e294133a.png)
+
+## Install
+
+Clone Repo
+
+Install virtual environment
+```
+python -m venv env_qrcode_edh
+```
+
+Install requirements
+```
+pip install -r requirements.txt
+```
+
+Install fonts
