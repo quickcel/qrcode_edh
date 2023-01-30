@@ -21,3 +21,11 @@ pip install -r requirements.txt
 ```
 
 Install fonts
+```
+static/fonts
+```
+
+Create output directory
+```
+static/output
+```
